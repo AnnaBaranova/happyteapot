@@ -4,30 +4,68 @@ import { Route, Switch, Redirect } from "react-router-dom";
 import HomePage from "../../pages/HomePage/HomePage";
 import ProductPage from "../../pages/ProductPage/ProductPage";
 import SignupPage from "../../pages/SignupPage/SignupPage";
+import LoginPage from "../LoginPage/LoginPage";
+import CartPage from "../CartPage/CartPage";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
 import userService from "../../utils/userService";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      user: userService.getUser(),
+    };
+  }
+
   handleSignupOrLogin = () => {
+    console.log("handleSignupOrLogin");
     this.setState({ user: userService.getUser() });
   };
 
+  handleLogout = () => {
+    console.log("handleLogout");
+    userService.logout();
+    this.setState({ user: null });
+  };
+
   render() {
+    const { user } = this.state;
     return (
       <div className="App">
         <header className="container-fluid">
-          <NavBar />
+          <NavBar user={user} handleLogout={this.handleLogout} />
         </header>
         <main class="container-fluid">
           <Switch>
             <Route exact path="/" render={() => <HomePage />} />
+            <Route
+              exact
+              path="/cart"
+              render={() =>
+                userService.getUser() ? (
+                  <CartPage user={user} />
+                ) : (
+                  <Redirect to="/login" />
+                )
+              }
+            />
             <Route exact path="/product" render={() => <ProductPage />} />
             <Route
               exact
               path="/signup"
               render={({ history }) => (
                 <SignupPage
+                  history={history}
+                  handleSignupOrLogin={this.handleSignupOrLogin}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/login"
+              render={({ history }) => (
+                <LoginPage
                   history={history}
                   handleSignupOrLogin={this.handleSignupOrLogin}
                 />

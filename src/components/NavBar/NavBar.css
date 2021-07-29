@@ -1,5 +1,9 @@
 .NavBar {
-    display: flex;
-    justify-content: center;
-    margin: 0 0 20px;
-  }
+  display: flex;
+  justify-content: center;
+  margin: 0 0 20px;
+}
+
+.fa-shopping-cart {
+  color: red;
+}

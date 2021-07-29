@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import userService from "../../utils/userService";
-import './SignupForm.css'
+import "./SignupForm.css";
 
 class SignupForm extends Component {
   state = {
@@ -20,13 +20,12 @@ class SignupForm extends Component {
 
   handleSubmit = async (e) => {
     e.preventDefault();
-    try{
-        await userService.signup(this.state);
-        this.props.handleSignupOrLogin()
-        this.props.history.push('/')
-
-    } catch(err) {
-        this.props.updateMessage(err.message);
+    try {
+      await userService.signup(this.state);
+      this.props.handleSignupOrLogin();
+      this.props.history.push("/");
+    } catch (err) {
+      this.props.updateMessage(err.message);
     }
   };
 
@@ -92,7 +91,7 @@ class SignupForm extends Component {
           </div>
           <div className="form-group">
             <div className="form-floating">
-              <button className="btn btn-light" disabled={this.isFormInvalid()}>
+              <button className="btn btn-dark" disabled={this.isFormInvalid()}>
                 Sign Up
               </button>
               &nbsp;&nbsp;
