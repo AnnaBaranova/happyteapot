@@ -12,8 +12,9 @@ const HomePage = ({ products }) => {
       <div className="row">
         {products.map((product) => (
           <div className="col" key={product._id}>
-              {product.name}
-            {/* <Product product={product} /> */}
+              {/* {product.name} -
+              <img src={product.img}></img> */}
+            <Product product={product} />
           </div>
         ))}
       </div>
