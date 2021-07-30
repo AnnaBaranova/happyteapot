@@ -9,12 +9,14 @@ import CartPage from "../CartPage/CartPage";
 import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
 import userService from "../../utils/userService";
+import productService from "../../utils/productService";
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       user: userService.getUser(),
+      products: [],
     };
   }
 
@@ -29,8 +31,14 @@ class App extends Component {
     this.setState({ user: null });
   };
 
+  async componentDidMount(){
+    const products = await productService.index();
+    console.log(products)
+    this.setState({products})
+  }
+
   render() {
-    const { user } = this.state;
+    const { user, products } = this.state;
     return (
       <div className="App">
         <header className="container-fluid">
@@ -38,7 +46,7 @@ class App extends Component {
         </header>
         <main class="container-fluid">
           <Switch>
-            <Route exact path="/" render={() => <HomePage />} />
+            <Route exact path="/" render={() => <HomePage products={products} />} />
             <Route
               exact
               path="/cart"
