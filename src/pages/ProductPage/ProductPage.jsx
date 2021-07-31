@@ -31,6 +31,11 @@ class ProductPage extends Component {
     }
   };
 
+  handleDelete = async (e) => {
+    await productService.delete(this.state.product._id);
+    this.props.history.push("/");
+  };
+
   render() {
     const { product } = this.state;
     return (
@@ -87,6 +92,24 @@ class ProductPage extends Component {
           </div>
           <div className="row md-6">
             <p>Description: {product.name}</p>
+          </div>
+          <div className="btn-group">
+            <div className="btn-toolbar">
+              <Link to={`/product/${product._id}`}>
+                <button type="button" class="btn btn-secondary">
+                  Update
+                </button>
+              </Link>
+            </div>
+            <div className="btn-toolbar">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onClick={this.handleDelete}
+              >
+                Delete
+              </button>
+            </div>
           </div>
         </div>
       </div>

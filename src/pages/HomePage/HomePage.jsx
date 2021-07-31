@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import NavBar from "../../components/NavBar/NavBar";
 import ProductPage from "../../pages/ProductPage/ProductPage";
 import SignupPage from "../../pages/SignupPage/SignupPage";
@@ -30,11 +31,12 @@ const HomePage = ({ products }) => {
 
       <div className="row">
         {products.map((product, idx) => (
-          <div className="col-md-3 col-sm-2">
+          <div key={idx} className="col-md-3 col-sm-2">
             <Product product={product} />
           </div>
         ))}
       </div>
+      <Link to="/product">Add New Product</Link>
     </div>
   );
 };

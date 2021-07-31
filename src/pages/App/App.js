@@ -10,6 +10,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import Footer from "../../components/Footer/Footer";
 import userService from "../../utils/userService";
 import productService from "../../utils/productService";
+import NewProductPage from "../NewProductPage/NewProductPage";
 
 class App extends Component {
   constructor() {
@@ -17,6 +18,7 @@ class App extends Component {
     this.state = {
       user: userService.getUser(),
       products: [],
+      cart: [] 
     };
   }
 
@@ -31,11 +33,29 @@ class App extends Component {
     this.setState({ user: null });
   };
 
-  async componentDidMount(){
-    const products = await productService.index();
-    console.log(products)
-    this.setState({products})
+  async componentDidMount() {
+    await this.getProducts();
   }
+
+  getProducts = async () => {
+    const products = await productService.index();
+    console.log("updateProducts");
+    this.setState({ products });
+  };
+
+  // componentDidUpdate(prevProps, prevState){
+  //   if(prevState.products !== this.state.products && this.state.products.length){
+  //     debugger;
+
+  //   }
+
+  // }
+
+  // componentDidUpdate=  async () => {
+  //   const products = await productService.index();
+  //   console.log("update");
+  //   this.setState({ products });
+  // }
 
   render() {
     const { user, products } = this.state;
@@ -46,7 +66,11 @@ class App extends Component {
         </header>
         <main class="container-fluid">
           <Switch>
-            <Route exact path="/" render={() => <HomePage products={products} />} />
+            <Route
+              exact
+              path="/"
+              render={() => <HomePage products={products} />}
+            />
             <Route
               exact
               path="/cart"
@@ -59,7 +83,18 @@ class App extends Component {
               }
             />
             {/* <Route  exact path="/products/:id" render={() => <ProductPage />} /> */}
-            <Route  exact path="/products/:id" component={ProductPage} />
+            {/* <Route exact path="/products/:id" component={ProductPage} /> */}
+            <Route
+              exact
+              path="/products/:id"
+              render={({ history, match }) => (
+                <ProductPage
+                  handleUpdateProducts={this.getProducts}
+                  history={history}
+                  match={match}
+                />
+              )}
+            />
             <Route
               exact
               path="/signup"
@@ -77,6 +112,29 @@ class App extends Component {
                 <LoginPage
                   history={history}
                   handleSignupOrLogin={this.handleSignupOrLogin}
+                />
+              )}
+            />
+            <Route
+              exact
+              path="/product"
+              render={({ history }) => (
+                <NewProductPage
+                  handleUpdateProducts={this.getProducts}
+                  history={history}
+                />
+              )}
+            />
+            {/* <Route exact path="/products/:id" component={NewProductPage} /> */}
+
+            <Route
+              exact
+              path="/product/:id"
+              render={({ history, match }) => (
+                <NewProductPage
+                  handleUpdateProducts={this.getProducts}
+                  history={history}
+                  match={match}
                 />
               )}
             />
