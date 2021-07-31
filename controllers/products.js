@@ -11,10 +11,13 @@ async function index(req, res) {
     res.status(201).json(product);
   }
 
+  async function show(req, res) {
+    const product = await Product.findById(req.params.id);
+    res.status(200).json(product);
+  }
 
 module.exports = {
     index,
     create,
-
-
+    show,
 }

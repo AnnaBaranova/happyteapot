@@ -1,20 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Rating from "../Rating/Rating";
+import "./Product.css";
 
 const Product = ({ product }) => {
   return (
-    <div>
-      <div className="card mb-3">
-        <Link to={`/product/${product._id}`} className="card-header">
-          <h1>{product.name}</h1>
-        </Link>
-        <img
+    <div key={product._id} className="card mb-3 card-size">
+      <Link to={`/products/${product._id}`} className="card-header">
+        <h1>{product.name}</h1>
+      </Link>
+      <img
           className="card-img-top"
           src={product.img}
           alt={product.name}
         ></img>
-        {/* <svg
+      {/* <svg
           xmlns="http://www.w3.org/2000/svg"
           className="d-block user-select-none"
           width="100%"
@@ -28,16 +28,16 @@ const Product = ({ product }) => {
         >
           <img src={product.img} alt={product.name}></img>
         </svg> */}
-        <ul className="list-group list-group-flush">
-          <li className="list-group-item">{product.description}</li>
-          <li className="list-group-item">{product.price} CAD</li>
-        </ul>
-        <Rating
-          value={product.avRating}
-          text={`${product.numReviews} reviews`}
-          color = "#f8e825"
-        />
-        {/* <div className="card-body">
+      <ul className="list-group list-group-flush">
+        <li className="list-group-item">{product.description}</li>
+        <li className="list-group-item">{product.price} CAD</li>
+      </ul>
+      <Rating
+        value={product.avRating}
+        text={`${product.numReviews} reviews`}
+        color="#f8e825"
+      />
+      {/* <div className="card-body">
           <a href="#" className="card-link">
             Card link
           </a>
@@ -45,9 +45,8 @@ const Product = ({ product }) => {
             Another link
           </a>
         </div> */}
-        <div className="card-footer text-muted">
-          {product.quantity > 0 ? "In stock" : "Out of Stock"}
-        </div>
+      <div className="card-footer text-muted">
+        {product.quantity > 0 ? "In stock" : "Out of Stock"}
       </div>
     </div>
   );

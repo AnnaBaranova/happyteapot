@@ -58,7 +58,8 @@ class App extends Component {
                 )
               }
             />
-            <Route exact path="/product" render={() => <ProductPage />} />
+            {/* <Route  exact path="/products/:id" render={() => <ProductPage />} /> */}
+            <Route  exact path="/products/:id" component={ProductPage} />
             <Route
               exact
               path="/signup"
