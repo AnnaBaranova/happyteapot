@@ -9,6 +9,7 @@ class ProductPage extends Component {
     super();
     this.state = {
       product: {},
+      item: 1,
     };
   }
 
@@ -17,6 +18,18 @@ class ProductPage extends Component {
     this.setState({ product });
     console.log(product);
   }
+
+  IncrementItem = () => {
+    const item = this.state.item + 1;
+    this.setState({ item });
+  };
+
+  DecreaseItem = () => {
+    if (this.state.item > 0) {
+      const item = this.state.item - 1;
+      this.setState({ item });
+    }
+  };
 
   render() {
     const { product } = this.state;
@@ -45,25 +58,31 @@ class ProductPage extends Component {
               </li>
             </ul>
             {/* <div class="btn-group mr-2" role="group" aria-label="First group"> */}
-            <div className="row">
-              <div className="col">
-                <button type="button" class="btn btn-secondary">
-                  -
-                </button>
-              </div>
-              <div className="col">
-                <h3> 3 </h3>
-              </div>
-              <div className="col">
-                <button type="button" class="btn btn-secondary">
-                  +
-                </button>
-              </div>
-              <div className="col">
-            <button type="button" class="btn btn-secondary">
-              Add to CART
-            </button>
-            </div>
+            <div className="btn-toolbar">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onClick={this.DecreaseItem}
+                disabled={!this.state.item}
+              >
+                -
+              </button>
+              <input className="" readOnly value={this.state.item}></input>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                onClick={this.IncrementItem}
+                disabled={this.state.item >= product.quantity}
+              >
+                +
+              </button>
+              <button
+                type="button"
+                class="btn btn-secondary"
+                disabled={!this.state.item}
+              >
+                Add to <i className="fas fa-shopping-cart"></i>
+              </button>
             </div>
           </div>
           <div className="row md-6">

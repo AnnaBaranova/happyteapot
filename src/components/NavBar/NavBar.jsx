@@ -37,8 +37,9 @@ const NavBar = ({ user, handleLogout }) => {
                 </li>
                 <li class="nav-item">
                   <Link to="/cart" class="nav-link">
-                    <i className="fas fa-shopping-cart"><span class="badge bg-dark rounded-pill">1</span></i>
-                    Cart
+                    <i className="fas fa-shopping-cart">
+                      <span class="badge bg-dark rounded-pill">1</span>
+                    </i>
                   </Link>
                 </li>
               </ul>
@@ -89,7 +90,7 @@ const NavBar = ({ user, handleLogout }) => {
               </li>
               <li class="nav-item">
                 <Link to="/cart" class="nav-link">
-                  <i className="fas fa-shopping-cart"></i>Cart
+                  <i className="fas fa-shopping-cart"></i>
                 </Link>
               </li>
             </ul>
