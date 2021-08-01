@@ -30,12 +30,14 @@ class CartPage extends React.Component {
   };
 
   decreaseItem = async (idx) => {
+      if(this.props.cart[idx].quantity > 0) {
     const newCart = await userService.updateCart(
       this.props.user._id,
       this.props.cart[idx]._id,
       this.props.cart[idx].quantity - 1
     );
     this.props.setCart(newCart);
+      }
   };
 
   render() {
@@ -73,6 +75,7 @@ class CartPage extends React.Component {
                       type="button"
                       class="btn btn-info"
                       onClick={() => this.decreaseItem(idx)}
+                      disabled={item.quantity <=0}
                     >
                       -
                     </button>
@@ -81,6 +84,7 @@ class CartPage extends React.Component {
                       type="button"
                       class="btn btn-info"
                       onClick={() => this.incrementItem(idx)}
+                      disabled={item.quantity >= productsMap[item.product].quantity}
                     >
                       +
                     </button>
