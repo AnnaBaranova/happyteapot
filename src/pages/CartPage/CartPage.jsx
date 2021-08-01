@@ -30,14 +30,14 @@ class CartPage extends React.Component {
   };
 
   decreaseItem = async (idx) => {
-      if(this.props.cart[idx].quantity > 0) {
-    const newCart = await userService.updateCart(
-      this.props.user._id,
-      this.props.cart[idx]._id,
-      this.props.cart[idx].quantity - 1
-    );
-    this.props.setCart(newCart);
-      }
+    if (this.props.cart[idx].quantity > 0) {
+      const newCart = await userService.updateCart(
+        this.props.user._id,
+        this.props.cart[idx]._id,
+        this.props.cart[idx].quantity - 1
+      );
+      this.props.setCart(newCart);
+    }
   };
 
   render() {
@@ -75,7 +75,7 @@ class CartPage extends React.Component {
                       type="button"
                       class="btn btn-info"
                       onClick={() => this.decreaseItem(idx)}
-                      disabled={item.quantity <=0}
+                      disabled={item.quantity <= 0}
                     >
                       -
                     </button>
@@ -84,7 +84,9 @@ class CartPage extends React.Component {
                       type="button"
                       class="btn btn-info"
                       onClick={() => this.incrementItem(idx)}
-                      disabled={item.quantity >= productsMap[item.product].quantity}
+                      disabled={
+                        item.quantity >= productsMap[item.product].quantity
+                      }
                     >
                       +
                     </button>
@@ -104,7 +106,23 @@ class CartPage extends React.Component {
           </tbody>
         </table>
 
-        <button className="buy btn btn-lg btn-success mb-3">BUY</button>
+        <div className="row justify-content-end">
+          <div className="col-2">
+            <h5>
+              {" "}
+              Total: {" "}
+              {this.props.cart.reduce(
+                (total, item) =>
+                  (total =
+                    total + productsMap[item.product].price * item.quantity),
+                0
+              )}
+            </h5>
+          </div>
+          <div className="col-2">
+            <button className="buy btn btn-lg btn-success mb-3">BUY</button>
+          </div>
+        </div>
       </div>
     );
   }
