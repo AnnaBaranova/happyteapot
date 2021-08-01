@@ -34,7 +34,7 @@ const Product = ({ product }) => {
       </ul>
       <Rating
         value={product.avRating}
-        text={`${product.numReviews} reviews`}
+        text={`${product.numReviews > 0 ? product.numReviews : 0} reviews`}
         color="#f8e825"
       />
       {/* <div className="card-body">

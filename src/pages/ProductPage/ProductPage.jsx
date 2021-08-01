@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import productService from "../../utils/productService";
 import Rating from "../../components/Rating/Rating";
+import userService from "../../utils/userService";
 
 class ProductPage extends Component {
   constructor() {
@@ -33,7 +34,18 @@ class ProductPage extends Component {
 
   handleDelete = async (e) => {
     await productService.delete(this.state.product._id);
+    this.props.handleUpdateProducts();
     this.props.history.push("/");
+  };
+
+  handleAddToCart = async (e) => {
+    e.preventDefault();
+    const newCart = await userService.addToCart(
+      this.props.user._id,
+      this.state.product._id,
+      this.state.item
+    );
+    this.props.setCart(newCart)
   };
 
   render() {
@@ -85,6 +97,7 @@ class ProductPage extends Component {
                 type="button"
                 class="btn btn-secondary"
                 disabled={!this.state.item}
+                onClick={this.handleAddToCart}
               >
                 Add to <i className="fas fa-shopping-cart"></i>
               </button>

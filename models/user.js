@@ -3,11 +3,22 @@ const bcrypt = require("bcrypt");
 
 const SALT_ROUNDS = 6;
 
+const itemSchema = new mongoose.Schema(
+  {
+      product: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
+      quantity: Number
+  },
+  {
+    timestamps: true,
+  }
+);
+
 const userSchema = new mongoose.Schema(
   {
     name: String,
     email: { type: String, required: true, lowercase: true, unique: true },
     password: String,
+    shoppingCart:[itemSchema],
   },
   {
     timestamps: true,

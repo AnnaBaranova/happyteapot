@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./NavBar.css";
 
-const NavBar = ({ user, handleLogout }) => {
+const NavBar = ({ cart, user, handleLogout }) => {
   if (user) {
     return (
       <>
@@ -38,7 +38,7 @@ const NavBar = ({ user, handleLogout }) => {
                 <li class="nav-item">
                   <Link to="/cart" class="nav-link">
                     <i className="fas fa-shopping-cart">
-                      <span class="badge bg-dark rounded-pill">1</span>
+                      <span class="badge bg-danger rounded-pill sup">{cart}</span>
                     </i>
                   </Link>
                 </li>
@@ -90,7 +90,9 @@ const NavBar = ({ user, handleLogout }) => {
               </li>
               <li class="nav-item">
                 <Link to="/cart" class="nav-link">
-                  <i className="fas fa-shopping-cart"></i>
+                  <i className="fas fa-shopping-cart">
+                    <span class="badge bg-danger rounded-pill sup">{cart}</span>
+                  </i>
                 </Link>
               </li>
             </ul>

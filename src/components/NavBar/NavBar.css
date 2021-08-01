@@ -7,3 +7,15 @@
 .fa-shopping-cart {
   color: red;
 }
+
+.sup {
+  top: -0.9em;
+  position: relative;
+  font-size: 75%;
+  /* line-height: 0; */
+  vertical-align: baseline;
+}
+
+.badge{
+  padding: 0.5em;
+}

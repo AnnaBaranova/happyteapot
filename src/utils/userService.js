@@ -1,3 +1,4 @@
+// import user from "../../models/user";
 import tokenService from "./tokenService";
 
 const BASE_URL = "/api/users/";
@@ -40,9 +41,24 @@ function login(creds) {
     .then(({token}) => tokenService.setToken(token));
   }
 
+  function addToCart(userId, productId, quantity){
+    console.log(userId, productId)
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + tokenService.getToken(),
+      },
+      body: JSON.stringify({product: productId, quantity}),
+    };
+    return fetch(BASE_URL + userId + '/cart', options).then((res) => res.json());
+
+  }
+
 export default {
   signup,
   getUser,
   logout,
-  login
+  login,
+  addToCart
 };

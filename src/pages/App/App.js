@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
-import { Route, Switch, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, useHistory } from "react-router-dom";
 import HomePage from "../../pages/HomePage/HomePage";
 import ProductPage from "../../pages/ProductPage/ProductPage";
 import SignupPage from "../../pages/SignupPage/SignupPage";
@@ -18,29 +18,44 @@ class App extends Component {
     this.state = {
       user: userService.getUser(),
       products: [],
-      cart: [] 
+      cart: [],
     };
   }
 
   handleSignupOrLogin = () => {
     console.log("handleSignupOrLogin");
     this.setState({ user: userService.getUser() });
+    this.setState({ cart: this.state.user.shoppingCart });
   };
 
   handleLogout = () => {
     console.log("handleLogout");
     userService.logout();
     this.setState({ user: null });
+    this.setState({ cart: [] });
   };
 
   async componentDidMount() {
     await this.getProducts();
+    if (this.state.user) {
+      this.setState({ cart: this.state.user.shoppingCart });
+    }
   }
 
   getProducts = async () => {
     const products = await productService.index();
     console.log("updateProducts");
     this.setState({ products });
+  };
+
+  setCart = (cart) => {
+    this.setState(prevState => ({
+      cart: cart,
+      user: {
+        ...prevState.user,
+        shoppingCart: cart,
+      }
+    }));
   };
 
   // componentDidUpdate(prevProps, prevState){
@@ -58,11 +73,15 @@ class App extends Component {
   // }
 
   render() {
-    const { user, products } = this.state;
+    const { user, products, cart } = this.state;
     return (
       <div className="App">
         <header className="container-fluid">
-          <NavBar user={user} handleLogout={this.handleLogout} />
+          <NavBar
+            cart={this.state.cart.length}
+            user={user}
+            handleLogout={this.handleLogout}
+          />
         </header>
         <main class="container-fluid">
           <Switch>
@@ -76,7 +95,7 @@ class App extends Component {
               path="/cart"
               render={() =>
                 userService.getUser() ? (
-                  <CartPage user={user} />
+                  <CartPage user={user} cart={cart} products={products}/>
                 ) : (
                   <Redirect to="/login" />
                 )
@@ -89,6 +108,8 @@ class App extends Component {
               path="/products/:id"
               render={({ history, match }) => (
                 <ProductPage
+                  setCart={this.setCart}
+                  user={user}
                   handleUpdateProducts={this.getProducts}
                   history={history}
                   match={match}
