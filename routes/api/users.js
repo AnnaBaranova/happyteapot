@@ -8,6 +8,7 @@ router.post("/signup", usersCtrl.signup);
 router.post("/login", usersCtrl.login);
 router.post("/:id/cart", usersCtrl.addToCart);
 router.delete("/:id/cart/:itemId", usersCtrl.removeFromCart);
+router.put("/:id/cart/:itemId", usersCtrl.updateCart);
 
 // protected
 router.use(require('../../config/auth'));

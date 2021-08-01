@@ -78,9 +78,27 @@ async function removeFromCart(req, res) {
   }
 }
 
+async function updateCart(req, res) {
+  try {
+    const user = await User.findById(req.params.id);
+    const itemIndex = user.shoppingCart.findIndex((el) =>
+      el._id.equals(req.params.itemId)
+    );
+    console.log(itemIndex);
+    const newQuantity = req.body.quantity;
+    console.log(newQuantity);
+    user.shoppingCart[itemIndex].quantity = newQuantity;
+    user.save();
+    return res.status(200).json(user.shoppingCart);
+  } catch (err) {
+    return res.status(400).json(err);
+  }
+}
+
 module.exports = {
   signup,
   login,
   addToCart,
   removeFromCart,
+  updateCart,
 };

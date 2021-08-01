@@ -13,21 +13,35 @@ class CartPage extends React.Component {
     this.state = {};
   }
 
-
-  handleRemoveFromCart= async (id) => {
+  handleRemoveFromCart = async (id) => {
     // e.preventDefault();
-    console.log(id)
-    const newCart = await userService.removeFromCart(
+    console.log(id);
+    const newCart = await userService.removeFromCart(this.props.user._id, id);
+    this.props.setCart(newCart);
+  };
+
+  incrementItem = async (idx) => {
+    const newCart = await userService.updateCart(
       this.props.user._id,
-      id
+      this.props.cart[idx]._id,
+      this.props.cart[idx].quantity + 1
     );
-    this.props.setCart(newCart)
+    this.props.setCart(newCart);
+  };
+
+  decreaseItem = async (idx) => {
+    const newCart = await userService.updateCart(
+      this.props.user._id,
+      this.props.cart[idx]._id,
+      this.props.cart[idx].quantity - 1
+    );
+    this.props.setCart(newCart);
   };
 
   render() {
-      const productsMap = {}
-      this.props.products.forEach(el => productsMap[el._id] = el)
-      console.log(productsMap)
+    const productsMap = {};
+    this.props.products.forEach((el) => (productsMap[el._id] = el));
+    console.log(productsMap);
 
     return (
       <div className="container-fluid col-6">
@@ -47,29 +61,46 @@ class CartPage extends React.Component {
               <tr key={idx} className="table-active">
                 <th scope="row">
                   {" "}
-                  <Link to={`/products/${item.product}`}>{productsMap[item.product].name}</Link>{" "}
+                  <Link to={`/products/${item.product}`}>
+                    {productsMap[item.product].name}
+                  </Link>{" "}
                 </th>
                 <td>{productsMap[item.product].price}</td>
                 <td>
                   {" "}
                   <div className="btn-toolbar">
-                    <button type="button" class="btn btn-info">
+                    <button
+                      type="button"
+                      class="btn btn-info"
+                      onClick={() => this.decreaseItem(idx)}
+                    >
                       -
                     </button>
                     <input className="" readOnly value={item.quantity}></input>
-                    <button type="button" class="btn btn-info">
+                    <button
+                      type="button"
+                      class="btn btn-info"
+                      onClick={() => this.incrementItem(idx)}
+                    >
                       +
                     </button>
                   </div>
                 </td>
                 <td>{productsMap[item.product].price * item.quantity}</td>
                 <td>
-                  <button className="btn btn-danger mb-3" onClick={() => this.handleRemoveFromCart(item._id)}>Remove</button>
+                  <button
+                    className="btn btn-danger mb-3"
+                    onClick={() => this.handleRemoveFromCart(item._id)}
+                  >
+                    Remove
+                  </button>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+
+        <button className="buy btn btn-lg btn-success mb-3">BUY</button>
       </div>
     );
   }
