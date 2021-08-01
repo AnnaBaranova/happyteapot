@@ -95,7 +95,7 @@ class App extends Component {
               path="/cart"
               render={() =>
                 userService.getUser() ? (
-                  <CartPage user={user} cart={cart} products={products}/>
+                  <CartPage user={user} cart={cart} products={products} setCart={this.setCart}/>
                 ) : (
                   <Redirect to="/login" />
                 )

@@ -53,7 +53,7 @@ class ProductPage extends Component {
     return (
       <div>
         <Link to="/">Go Back </Link>
-        <h1> Hello {product.name}</h1>
+        <h1> {product.name}</h1>
         <div className="row md-6">
           <div className="col md-3">
             <img src={product.img} alt={product.name} fluid />
@@ -63,7 +63,7 @@ class ProductPage extends Component {
               <li class="list-group-item d-flex justify-content-between align-items-center">
                 <Rating
                   value={product.avRating}
-                  text={`${product.numReviews} reviews`}
+                  text={`${product.numReviews > 0 ? product.numReviews : 0} reviews`}
                   color="#f8e825"
                 />
               </li>

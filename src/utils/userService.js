@@ -55,10 +55,24 @@ function login(creds) {
 
   }
 
+  function removeFromCart(userId, itemId) {
+    const options = {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: "Bearer " + tokenService.getToken(),
+      },
+    };
+    return fetch(BASE_URL + userId + '/cart/' + itemId, options).then((res) => res.json());
+  }
+
+  
+
 export default {
   signup,
   getUser,
   logout,
   login,
-  addToCart
+  addToCart,
+  removeFromCart
 };
