@@ -11,6 +11,7 @@ import Footer from "../../components/Footer/Footer";
 import userService from "../../utils/userService";
 import productService from "../../utils/productService";
 import NewProductPage from "../NewProductPage/NewProductPage";
+import OrderPage from "../OrderPage/OrderPage";
 
 class App extends Component {
   constructor() {
@@ -49,12 +50,12 @@ class App extends Component {
   };
 
   setCart = (cart) => {
-    this.setState(prevState => ({
+    this.setState((prevState) => ({
       cart: cart,
       user: {
         ...prevState.user,
         shoppingCart: cart,
-      }
+      },
     }));
   };
 
@@ -92,10 +93,20 @@ class App extends Component {
             />
             <Route
               exact
+              path="/orders"
+              render={() => <OrderPage />}
+            />
+            <Route
+              exact
               path="/cart"
               render={() =>
                 userService.getUser() ? (
-                  <CartPage user={user} cart={cart} products={products} setCart={this.setCart}/>
+                  <CartPage
+                    user={user}
+                    cart={cart}
+                    products={products}
+                    setCart={this.setCart}
+                  />
                 ) : (
                   <Redirect to="/login" />
                 )

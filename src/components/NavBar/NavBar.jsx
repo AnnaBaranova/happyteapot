@@ -19,7 +19,7 @@ const NavBar = ({ cart, user, handleLogout }) => {
       </li>
     </>
   ) : (
-    <div>
+    <>
       <li class="nav-item">
         <Link to="/login" class="nav-link">
           <i className="fas fa-user-circle"></i>LOG IN
@@ -30,7 +30,7 @@ const NavBar = ({ cart, user, handleLogout }) => {
           <i className="fas fa-user"></i>SIGN UP
         </Link>
       </li>
-    </div>
+    </>
   );
 
   return (
