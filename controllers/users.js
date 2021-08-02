@@ -52,8 +52,18 @@ async function addToCart(req, res) {
     console.log(user);
     console.log(req.body);
     const item = req.body;
-    user.shoppingCart.push(item);
+    const itemIndex = user.shoppingCart.findIndex((el) =>
+      el.product.equals(item.product)
+    );
+    console.log("itemIndex", itemIndex);
+    if (itemIndex === -1) {
+      user.shoppingCart.push(item);
+    } else {
+      user.shoppingCart[itemIndex].quantity =
+        user.shoppingCart[itemIndex].quantity + item.quantity;
+    }
     await user.save();
+    console.log("user after save", user);
     res.status(200).json(user.shoppingCart);
   } catch (err) {
     return res.status(400).json(err);
