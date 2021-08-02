@@ -4,7 +4,7 @@ import "./NavBar.css";
 
 const NavBar = ({ cart, user, handleLogout }) => {
   let nav = user ? (
-    <div>
+    <>
       <li class="nav-item">
         <Link to="/profile" class="nav-link active text-success">
           Welcome, {`${user.name.toUpperCase()}`}
@@ -17,7 +17,7 @@ const NavBar = ({ cart, user, handleLogout }) => {
           LOG OUT
         </Link>
       </li>
-    </div>
+    </>
   ) : (
     <div>
       <li class="nav-item">
