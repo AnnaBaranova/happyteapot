@@ -12,6 +12,7 @@ import userService from "../../utils/userService";
 import productService from "../../utils/productService";
 import NewProductPage from "../NewProductPage/NewProductPage";
 import OrderPage from "../OrderPage/OrderPage";
+import orderService from "../../utils/orderService";
 
 class App extends Component {
   constructor() {
@@ -20,6 +21,7 @@ class App extends Component {
       user: userService.getUser(),
       products: [],
       cart: [],
+      orders: [],
     };
   }
 
@@ -59,6 +61,18 @@ class App extends Component {
     }));
   };
 
+  getOrders = async () => {
+    const user = this.state.user._id;
+    const orders = await orderService.index(user);
+    console.log("getOrders", orders);
+    this.setState({ orders });
+  };
+
+  setOrders = (orders) => {
+    console.log("setOrders", orders);
+    this.setState({ orders });
+  };
+
   // componentDidUpdate(prevProps, prevState){
   //   if(prevState.products !== this.state.products && this.state.products.length){
   //     debugger;
@@ -74,7 +88,7 @@ class App extends Component {
   // }
 
   render() {
-    const { user, products, cart } = this.state;
+    const { user, products, cart, orders } = this.state;
     return (
       <div className="App">
         <header className="container-fluid">
@@ -93,19 +107,29 @@ class App extends Component {
             />
             <Route
               exact
-              path="/orders"
-              render={() => <OrderPage />}
+              path="/users/:id/orders"
+              render={() => (
+                <OrderPage
+                  user={user}
+                  getOrders={this.getOrders}
+                  orders={orders}
+                  setOrders={this.setOrders}
+                />
+              )}
             />
             <Route
               exact
               path="/cart"
-              render={() =>
+              render={({ history }) =>
                 userService.getUser() ? (
                   <CartPage
                     user={user}
+                    setOrders={this.setOrders}
+                    getOrders={this.getOrders}
                     cart={cart}
                     products={products}
                     setCart={this.setCart}
+                    history={history}
                   />
                 ) : (
                   <Redirect to="/login" />

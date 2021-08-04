@@ -12,6 +12,11 @@ const NavBar = ({ cart, user, handleLogout }) => {
       </li>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <li class="nav-item">
+        <Link to={`/users/${user._id}/orders`} class="nav-link active text-success">
+          Orders
+        </Link>
+      </li>
+      <li class="nav-item">
         <Link to="" class="nav-link" onClick={handleLogout}>
           <i className="fas fa-user-circle"></i>
           LOG OUT

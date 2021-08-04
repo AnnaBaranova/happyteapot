@@ -6,7 +6,7 @@ const SALT_ROUNDS = 6;
 const itemSchema = new mongoose.Schema(
   {
       product: {type: mongoose.Schema.Types.ObjectId, ref: 'Product'},
-      quantity: Number
+      quantity: Number,
   },
   {
     timestamps: true,

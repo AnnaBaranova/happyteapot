@@ -13,6 +13,7 @@ const itemSchema = new mongoose.Schema(
 
 const OrderSchema = new mongoose.Schema(
   {
+    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
     items: [itemSchema],
     total: Number,
     isPaid: Boolean,
