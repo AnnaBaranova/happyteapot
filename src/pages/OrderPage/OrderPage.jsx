@@ -26,7 +26,7 @@ class OrderPage extends React.Component {
       <div className="container-fluid">
         <h1> My Orders </h1>
         <div className="container-fluid">
-          {this.props.orders.map((order, idx) => (
+          {this.props.orders.reverse().map((order, idx) => (
             <div key={idx} className="col">
               <Order handleCancelOrder={this.handleCancelOrder} order={order} />
             </div>

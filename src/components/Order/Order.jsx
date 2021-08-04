@@ -2,12 +2,18 @@ import react from "react";
 import { Link } from "react-router-dom";
 
 const Order = ({ order, handleCancelOrder }) => {
-  const formatter = new Intl.DateTimeFormat("en-GB", {
-    year: "numeric",
-    month: "long",
-    day: "2-digit",
-  });
-  const dateString = order.createdAt;
+
+  function checkStatus(){
+    let status = ''
+    if (!order.isPaid && !order.isShipped) {
+      return status = "received"
+    } else if(order.isPaid && !order.isShipped) {
+      return status = "paid"
+    } else {
+      return status = "shipped"
+    }
+  }
+
   return (
     <>
       <div className="container-fluid col-10">
@@ -46,6 +52,9 @@ const Order = ({ order, handleCancelOrder }) => {
         </div>
 
         <h5>Details</h5>
+        <p>ShippingAdress: {order.shippingAddress}</p>
+        <p>Payment method: {order.paymentMethod}</p>
+        <p>Status: {checkStatus()}</p>
         <table className="container-fluid table table-hover">
           <thead>
             <tr>

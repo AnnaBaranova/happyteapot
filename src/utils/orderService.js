@@ -2,7 +2,7 @@ import tokenService from "./tokenService";
 
 const BASE_URL = "/api/users/";
 
-function addToOrder(userId, cart) {
+function addToOrder(userId, shipping, payment, cart) {
   console.log(userId, cart);
   const options = {
     method: "POST",
@@ -14,8 +14,8 @@ function addToOrder(userId, cart) {
       items: cart,
       isPaid: false,
       isShipped: false,
-      shippingAddress: "String",
-      paymentMethod: "Cash",
+      shippingAddress: shipping,
+      paymentMethod: payment,
       total: cart.reduce( (acc, item) => acc + (item.price * item.quantity), 0)
     }),
   };

@@ -5,10 +5,14 @@ import "./CartPage.css";
 import userService from "../../utils/userService";
 import orderService from "../../utils/orderService";
 
+
 class CartPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      shippingAddress: '',
+      paymentMethod: 'cash'
+    };
   }
 
   handleRemoveFromCart = async (id) => {
@@ -47,6 +51,8 @@ class CartPage extends React.Component {
     });
     const newOrder = await orderService.addToOrder(
       this.props.user._id,
+      this.state.shippingAddress,
+      this.state.paymentMethod,
       cartWithPrice
     );
     console.log("newOrder", newOrder);
@@ -61,6 +67,19 @@ class CartPage extends React.Component {
     this.props.products.forEach((el) => (productsMap[el._id] = el));
     console.log(productsMap);
     return productsMap;
+  }
+
+  handleChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  isFormInvalid() {
+    return !(
+      this.state.shippingAddress &&
+      this.state.paymentMethod
+    );
   }
 
   render() {
@@ -145,15 +164,43 @@ class CartPage extends React.Component {
                 )}
               </h5>
             </div>
-            <div className="col-2">
+          </div>
+          <div className="container-fluid login-form col-12">
+            <h3>Order Info </h3>
+            <form className="form" onSubmit={this.handleAddToOrder}>
+              <div className="form-group">
+                <div className="form-floating mb-3">
+                  <input
+                    type="text"
+                    className="form-control form-control-lg"
+                    placeholder="ShippingAddress"
+                    name="shippingAddress"
+                    value={this.state.shippingAddress}
+                    onChange={this.handleChange}
+                  />
+                  <label for="floatingInput">ShippingAddress</label>
+                </div>
+                </div>
+                <div class="form-group">
+                  <label for="payment-method" class="form-label mt-4">
+                    Payment method
+                  </label>
+                  <select multiple="" class="form-select" id="payment-method" name="paymentMethod" value={this.state.paymentMethod} onChange={this.handleChange}>
+                    <option>cash</option>
+                    <option>credit/debit card</option>
+                  </select>
+                </div>
+                <div class="form-group">
               <button
-                className="buy btn btn-lg btn-success mb-3"
-                onClick={this.handleAddToOrder}
+                className="buy btn btn-lg btn-success mb-6"
+                // onClick={this.handleAddToOrder}
+                disabled={this.isFormInvalid()}
               >
                 BUY
               </button>
+              </div>
+            </form>
             </div>
-          </div>
         </div>
       );
     } else {
