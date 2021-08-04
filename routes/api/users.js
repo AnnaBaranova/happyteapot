@@ -7,6 +7,7 @@ const usersCtrl = require("../../controllers/users");
 router.post("/signup", usersCtrl.signup);
 router.post("/login", usersCtrl.login);
 router.post("/:id/cart", usersCtrl.addToCart);
+router.delete("/:id/cart", usersCtrl.cleanCart);
 router.delete("/:id/cart/:itemId", usersCtrl.removeFromCart);
 router.put("/:id/cart/:itemId", usersCtrl.updateCart);
 

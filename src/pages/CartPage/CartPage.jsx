@@ -21,6 +21,11 @@ class CartPage extends React.Component {
     this.props.setCart(newCart);
   };
 
+  handleCleanCart = async () => {
+    const newCart = await userService.cleanCart(this.props.user._id);
+    this.props.setCart(newCart);
+  };
+
   incrementItem = async (idx) => {
     const newCart = await userService.updateCart(
       this.props.user._id,
@@ -42,6 +47,7 @@ class CartPage extends React.Component {
   };
 
   handleAddToOrder = async (e) => {
+    e.preventDefault();
     console.log("click");
     console.log(this.props.user._id);
     const productsMap = this.getProductMap();
@@ -58,7 +64,7 @@ class CartPage extends React.Component {
     console.log("newOrder", newOrder);
     // await this.props.setOrders(newOrder);
     await this.props.getOrders();
-    this.props.setCart([]);
+    await this.handleCleanCart()
     this.props.history.push(`users/${this.props.user._id}/orders`);
   };
 
@@ -192,15 +198,16 @@ class CartPage extends React.Component {
                 </div>
                 <div class="form-group">
               <button
-                className="buy btn btn-lg btn-success mb-6"
+                className="buy btn btn-lg btn-success mb-12 col-4"
                 // onClick={this.handleAddToOrder}
                 disabled={this.isFormInvalid()}
               >
-                BUY
+                B U Y
               </button>
               </div>
             </form>
             </div>
+            <button className='btn btn-danger col-2' onClick={this.handleCleanCart}>Clean Cart</button>
         </div>
       );
     } else {

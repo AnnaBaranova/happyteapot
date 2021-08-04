@@ -81,6 +81,21 @@ function updateCart(userId, itemId, quantity) {
   );
 }
 
+function cleanCart(userId) {
+  const options = {
+    method: "DELETE",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: "Bearer " + tokenService.getToken(),
+    },
+  };
+  return fetch(BASE_URL + userId + "/cart", options).then((res) =>
+    res.json()
+  );
+}
+
+
+
 export default {
   signup,
   getUser,
@@ -89,4 +104,5 @@ export default {
   addToCart,
   removeFromCart,
   updateCart,
+  cleanCart
 };

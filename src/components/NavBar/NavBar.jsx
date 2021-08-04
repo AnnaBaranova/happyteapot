@@ -6,13 +6,13 @@ const NavBar = ({ cart, user, handleLogout }) => {
   let nav = user ? (
     <>
       <li class="nav-item">
-        <Link to="/profile" class="nav-link active text-success">
+        <Link to="/profile" class="nav-link active text-danger">
           Welcome, {`${user.name.toUpperCase()}`}
         </Link>
       </li>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <li class="nav-item">
-        <Link to={`/users/${user._id}/orders`} class="nav-link active text-success">
+        <Link to={`/users/${user._id}/orders`} class="nav-link active">
           Orders
         </Link>
       </li>

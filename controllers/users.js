@@ -105,10 +105,22 @@ async function updateCart(req, res) {
   }
 }
 
+async function cleanCart(req, res) {
+  try {
+    const user = await User.findById(req.params.id);
+    user.shoppingCart = []
+    user.save();
+    return res.status(200).json(user.shoppingCart);
+  } catch (err) {
+    return res.status(400).json(err);
+  }
+}
+
 module.exports = {
   signup,
   login,
   addToCart,
   removeFromCart,
   updateCart,
+  cleanCart
 };
