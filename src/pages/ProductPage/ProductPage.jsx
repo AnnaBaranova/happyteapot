@@ -6,8 +6,8 @@ import Rating from "../../components/Rating/Rating";
 import userService from "../../utils/userService";
 
 class ProductPage extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       product: {},
       item: 1,
@@ -40,12 +40,16 @@ class ProductPage extends Component {
 
   handleAddToCart = async (e) => {
     e.preventDefault();
+    if(this.props.user) {
     const newCart = await userService.addToCart(
       this.props.user._id,
       this.state.product._id,
       this.state.item
     );
     this.props.setCart(newCart)
+    } else {
+      this.props.history.push('/login')
+    }
   };
 
   render() {
@@ -106,6 +110,7 @@ class ProductPage extends Component {
           <div className="row md-6">
             <p>Description: {product.name}</p>
           </div>
+          {this.props.user && this.props.user.isAdmin &&
           <div className="btn-group">
             <div className="btn-toolbar">
               <Link to={`/product/${product._id}`}>
@@ -124,6 +129,7 @@ class ProductPage extends Component {
               </button>
             </div>
           </div>
+  }
         </div>
       </div>
     );

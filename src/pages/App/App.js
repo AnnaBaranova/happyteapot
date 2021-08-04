@@ -103,7 +103,7 @@ class App extends Component {
             <Route
               exact
               path="/"
-              render={() => <HomePage products={products} />}
+              render={() => <HomePage user={user} products={products} />}
             />
             <Route
               exact
@@ -175,13 +175,17 @@ class App extends Component {
               exact
               path="/product"
               render={({ history }) => (
+                userService.getUser() ? (
                 <NewProductPage
+                  user={user}
                   handleUpdateProducts={this.getProducts}
                   history={history}
                 />
+                ) : (
+                  <Redirect to="/login" />
+                )
               )}
             />
-            {/* <Route exact path="/products/:id" component={NewProductPage} /> */}
 
             <Route
               exact

@@ -6,7 +6,7 @@ import SignupPage from "../../pages/SignupPage/SignupPage";
 import "./HomePage.css";
 import Product from "../../components/Product/Product";
 
-const HomePage = ({ products }) => {
+const HomePage = ({ user, products }) => {
   const splitRows = (products) =>
     products.reduce((acc, product, idx) => {
       const row = Math.floor(idx / 4);
@@ -35,8 +35,8 @@ const HomePage = ({ products }) => {
             <Product product={product} />
           </div>
         ))}
-      </div>
-      <Link to="/product">Add New Product</Link>
+      </div> {user && user.isAdmin &&
+      <Link to="/product">Add New Product</Link> }
     </div>
   );
 };
