@@ -25,7 +25,14 @@ function addToOrder(userId, shipping, payment, cart) {
 }
 
 function index(userId) {
-  return fetch(BASE_URL + userId + "/orders")
+  const options = {
+    method: "GET",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: "Bearer " + tokenService.getToken(),
+    },
+  }
+  return fetch(BASE_URL + userId + "/orders", options)
     .then((res) => res.json())
     .catch((err) => console.log("err", err));
 }
