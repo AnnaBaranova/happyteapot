@@ -4,6 +4,8 @@ import Rating from "../Rating/Rating";
 import "./Product.css";
 
 const Product = ({ product }) => {
+
+  
   return (
     <div key={product._id} className="card mb-3 card-size">
       <Link to={`/products/${product._id}`} className="card-header">

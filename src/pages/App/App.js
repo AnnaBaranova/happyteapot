@@ -114,6 +114,7 @@ class App extends Component {
                   getOrders={this.getOrders}
                   orders={orders}
                   setOrders={this.setOrders}
+                  products={products}
                 />
               )}
             />
