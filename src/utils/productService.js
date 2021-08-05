@@ -15,7 +15,6 @@ function getOne(id) {
 }
 
 function create(product) {
-  console.log(product);
   const options = {
     method: "POST",
     headers: {
@@ -28,7 +27,6 @@ function create(product) {
 }
 
 function update(product) {
-  console.log(product);
   const options = {
     method: "PUT",
     headers: {
@@ -60,10 +58,10 @@ function addReview(review, productId) {
     },
     body: JSON.stringify(review),
   };
-  return fetch(BASE_URL + productId + "/reviews", options).then((res) => res.json());
+  return fetch(BASE_URL + productId + "/reviews", options).then((res) =>
+    res.json()
+  );
 }
-
-
 
 export default {
   index,
@@ -71,5 +69,5 @@ export default {
   create,
   update,
   delete: deleteOne,
-  addReview
+  addReview,
 };

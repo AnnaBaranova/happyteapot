@@ -35,7 +35,6 @@ async function login(req, res) {
     user.comparePassword(req.body.pw, (err, isMatch) => {
       if (isMatch) {
         const token = createJWT(user);
-        console.log(token);
         res.json({ token });
       } else {
         return res.status(401).json({ err: "bad credentials" });
@@ -49,8 +48,6 @@ async function login(req, res) {
 async function addToCart(req, res) {
   try {
     const user = await User.findById(req.params.id);
-    console.log(user);
-    console.log(req.body);
     const item = req.body;
     const itemIndex = user.shoppingCart.findIndex((el) =>
       el.product.equals(item.product)
@@ -72,14 +69,10 @@ async function addToCart(req, res) {
 
 async function removeFromCart(req, res) {
   try {
-    // console.log(req.params.itemId);
-    // const user = await User.findOne({ "shoppingCart._id": req.params.itemId });
     const user = await User.findById(req.params.id);
-    console.log(user);
     const itemIndex = user.shoppingCart.findIndex((el) =>
       el._id.equals(req.params.itemId)
     );
-    console.log(itemIndex);
     user.shoppingCart.splice(itemIndex, 1);
     user.save();
     return res.status(200).json(user.shoppingCart);
@@ -94,9 +87,7 @@ async function updateCart(req, res) {
     const itemIndex = user.shoppingCart.findIndex((el) =>
       el._id.equals(req.params.itemId)
     );
-    console.log(itemIndex);
     const newQuantity = req.body.quantity;
-    console.log(newQuantity);
     user.shoppingCart[itemIndex].quantity = newQuantity;
     user.save();
     return res.status(200).json(user.shoppingCart);

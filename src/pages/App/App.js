@@ -26,13 +26,11 @@ class App extends Component {
   }
 
   handleSignupOrLogin = () => {
-    console.log("handleSignupOrLogin");
     this.setState({ user: userService.getUser() });
     this.setState({ cart: this.state.user.shoppingCart });
   };
 
   handleLogout = () => {
-    console.log("handleLogout");
     userService.logout();
     this.setState({ user: null });
     this.setState({ cart: [] });
@@ -47,7 +45,6 @@ class App extends Component {
 
   getProducts = async () => {
     const products = await productService.index();
-    console.log("updateProducts");
     this.setState({ products });
   };
 
@@ -64,28 +61,13 @@ class App extends Component {
   getOrders = async () => {
     const user = this.state.user._id;
     const orders = await orderService.index(user);
-    console.log("getOrders", orders);
     this.setState({ orders });
   };
 
   setOrders = (orders) => {
-    console.log("setOrders", orders);
     this.setState({ orders });
   };
 
-  // componentDidUpdate(prevProps, prevState){
-  //   if(prevState.products !== this.state.products && this.state.products.length){
-  //     debugger;
-
-  //   }
-
-  // }
-
-  // componentDidUpdate=  async () => {
-  //   const products = await productService.index();
-  //   console.log("update");
-  //   this.setState({ products });
-  // }
 
   render() {
     const { user, products, cart, orders } = this.state;
@@ -137,8 +119,6 @@ class App extends Component {
                 )
               }
             />
-            {/* <Route  exact path="/products/:id" render={() => <ProductPage />} /> */}
-            {/* <Route exact path="/products/:id" component={ProductPage} /> */}
             <Route
               exact
               path="/products/:id"
@@ -176,17 +156,17 @@ class App extends Component {
             <Route
               exact
               path="/product"
-              render={({ history }) => (
+              render={({ history }) =>
                 userService.getUser() ? (
-                <NewProductPage
-                  user={user}
-                  handleUpdateProducts={this.getProducts}
-                  history={history}
-                />
+                  <NewProductPage
+                    user={user}
+                    handleUpdateProducts={this.getProducts}
+                    history={history}
+                  />
                 ) : (
                   <Redirect to="/login" />
                 )
-              )}
+              }
             />
 
             <Route

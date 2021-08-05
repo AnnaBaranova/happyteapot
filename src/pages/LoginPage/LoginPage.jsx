@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import userService from "../../utils/userService";
-import './LoginPage.css'
+import "./LoginPage.css";
 
 class LoginPage extends Component {
   state = {
@@ -11,28 +11,26 @@ class LoginPage extends Component {
 
   handleChange = (e) => {
     // TODO: implement in an elegant way
-    const name = e.target.name
-    const value = e.target.value
-    this.setState({[name]: value})
-  }
+    const name = e.target.name;
+    const value = e.target.value;
+    this.setState({ [name]: value });
+  };
 
   handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await userService.login(this.state)
-      this.props.handleSignupOrLogin()
-      this.props.history.push('/')
+      await userService.login(this.state);
+      this.props.handleSignupOrLogin();
+      this.props.history.push("/");
+    } catch (error) {
+      alert("Invalid Credentials!");
     }
-    catch (error) {
-      console.log(error)
-      alert('Invalid Credentials!');
-  }
-}
+  };
 
   render() {
     return (
       <div className="container-fluid login-form col-3">
-          <h1>LOG IN</h1>
+        <h1>LOG IN</h1>
         <form className="form" onSubmit={this.handleSubmit}>
           <div className="form-group">
             <div className="form-floating mb-3">
@@ -53,7 +51,7 @@ class LoginPage extends Component {
                 type="password"
                 className="form-control form-control-lg"
                 placeholder="Password"
-                value={this.state.pw} 
+                value={this.state.pw}
                 name="pw"
                 onChange={this.handleChange}
               />
@@ -62,9 +60,7 @@ class LoginPage extends Component {
           </div>
           <div className="form-group">
             <div className="form-floating">
-              <button className="btn btn-dark">
-                LOG IN
-              </button>
+              <button className="btn btn-dark">LOG IN</button>
               &nbsp;&nbsp;
               <Link to="/">Cancel</Link>
             </div>

@@ -3,7 +3,6 @@ import tokenService from "./tokenService";
 const BASE_URL = "/api/users/";
 
 function addToOrder(userId, shipping, payment, cart) {
-  console.log(userId, cart);
   const options = {
     method: "POST",
     headers: {
@@ -16,7 +15,7 @@ function addToOrder(userId, shipping, payment, cart) {
       isShipped: false,
       shippingAddress: shipping,
       paymentMethod: payment,
-      total: cart.reduce( (acc, item) => acc + (item.price * item.quantity), 0)
+      total: cart.reduce((acc, item) => acc + item.price * item.quantity, 0),
     }),
   };
   return fetch(BASE_URL + userId + "/orders", options).then((res) =>
@@ -31,7 +30,7 @@ function index(userId) {
       "Content-type": "application/json",
       Authorization: "Bearer " + tokenService.getToken(),
     },
-  }
+  };
   return fetch(BASE_URL + userId + "/orders", options)
     .then((res) => res.json())
     .catch((err) => console.log("err", err));

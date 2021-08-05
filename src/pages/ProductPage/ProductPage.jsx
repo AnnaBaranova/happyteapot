@@ -19,12 +19,10 @@ class ProductPage extends Component {
   }
 
   async componentDidMount() {
-    // const product = await productService.getOne(this.props.match.params.id);
     const product = this.props.products.find(
       (el) => el._id == this.props.match.params.id
     );
     this.setState({ product });
-    console.log("componentDidMount", product);
   }
 
   async componentDidUpdate(prevProps, prevState) {
@@ -33,15 +31,8 @@ class ProductPage extends Component {
     );
     if (prevState.product.reviews.length !== product.reviews.length) {
       this.setState({ product });
-      console.log("componentDidUpdate", product);
     }
   }
-
-  // componentDidUpdate(prevProps, prevState){
-  //   if(prevState.products !== this.state.products && this.state.products.length){
-  //     debugger;
-
-  //   }
 
   IncrementItem = () => {
     const item = this.state.item + 1;
@@ -105,7 +96,6 @@ class ProductPage extends Component {
                 In Stock: {product.quantity}
               </li>
             </ul>
-            {/* <div class="btn-group mr-2" role="group" aria-label="First group"> */}
             <div className="btn-toolbar">
               <button
                 type="button"

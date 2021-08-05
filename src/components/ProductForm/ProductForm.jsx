@@ -47,7 +47,6 @@ class ProductForm extends Component {
     if (this.props.match && this.props.match.params.id) {
       const product = await productService.getOne(this.props.match.params.id);
       this.setState(product);
-      console.log(product);
     }
   }
 

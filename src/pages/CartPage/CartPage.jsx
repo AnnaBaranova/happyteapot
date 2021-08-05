@@ -5,18 +5,16 @@ import "./CartPage.css";
 import userService from "../../utils/userService";
 import orderService from "../../utils/orderService";
 
-
 class CartPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      shippingAddress: '',
-      paymentMethod: 'cash'
+      shippingAddress: "",
+      paymentMethod: "cash",
     };
   }
 
   handleRemoveFromCart = async (id) => {
-    console.log(id);
     const newCart = await userService.removeFromCart(this.props.user._id, id);
     this.props.setCart(newCart);
   };
@@ -48,8 +46,6 @@ class CartPage extends React.Component {
 
   handleAddToOrder = async (e) => {
     e.preventDefault();
-    console.log("click");
-    console.log(this.props.user._id);
     const productsMap = this.getProductMap();
     const cartWithPrice = this.props.cart.map((item) => {
       item.price = productsMap[item.product].price;
@@ -61,17 +57,14 @@ class CartPage extends React.Component {
       this.state.paymentMethod,
       cartWithPrice
     );
-    console.log("newOrder", newOrder);
-    // await this.props.setOrders(newOrder);
     await this.props.getOrders();
-    await this.handleCleanCart()
+    await this.handleCleanCart();
     this.props.history.push(`users/${this.props.user._id}/orders`);
   };
 
   getProductMap() {
     const productsMap = {};
     this.props.products.forEach((el) => (productsMap[el._id] = el));
-    console.log(productsMap);
     return productsMap;
   }
 
@@ -82,10 +75,7 @@ class CartPage extends React.Component {
   };
 
   isFormInvalid() {
-    return !(
-      this.state.shippingAddress &&
-      this.state.paymentMethod
-    );
+    return !(this.state.shippingAddress && this.state.paymentMethod);
   }
 
   render() {
@@ -186,28 +176,39 @@ class CartPage extends React.Component {
                   />
                   <label for="floatingInput">ShippingAddress</label>
                 </div>
-                </div>
-                <div class="form-group">
-                  <label for="payment-method" class="form-label mt-4">
-                    Payment method
-                  </label>
-                  <select multiple="" class="form-select" id="payment-method" name="paymentMethod" value={this.state.paymentMethod} onChange={this.handleChange}>
-                    <option>cash</option>
-                    <option>credit/debit card</option>
-                  </select>
-                </div>
-                <div class="form-group">
-              <button
-                className="buy btn btn-lg btn-success mb-12 col-4"
-                // onClick={this.handleAddToOrder}
-                disabled={this.isFormInvalid()}
-              >
-                B U Y
-              </button>
+              </div>
+              <div class="form-group">
+                <label for="payment-method" class="form-label mt-4">
+                  Payment method
+                </label>
+                <select
+                  multiple=""
+                  class="form-select"
+                  id="payment-method"
+                  name="paymentMethod"
+                  value={this.state.paymentMethod}
+                  onChange={this.handleChange}
+                >
+                  <option>cash</option>
+                  <option>credit/debit card</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <button
+                  className="buy btn btn-lg btn-success mb-12 col-4"
+                  disabled={this.isFormInvalid()}
+                >
+                  B U Y
+                </button>
               </div>
             </form>
-            </div>
-            <button className='btn btn-danger col-2' onClick={this.handleCleanCart}>Clean Cart</button>
+          </div>
+          <button
+            className="btn btn-danger col-2"
+            onClick={this.handleCleanCart}
+          >
+            Clean Cart
+          </button>
         </div>
       );
     } else {

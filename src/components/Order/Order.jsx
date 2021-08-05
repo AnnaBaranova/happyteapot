@@ -14,14 +14,9 @@ const Order = ({ order, products, handleCancelOrder }) => {
   }
 
   const [show, setShow] = useState(false);
-  console.log("products", products);
 
-  // function buildProductMap(products) {
-    let productsMap = {};
-    products.forEach((el) => (productsMap[el._id] = el));
-    console.log(productsMap);
-  // }
-  // const [productMap, setProductMap] = useState(buildProductMap(products));
+  let productsMap = {};
+  products.forEach((el) => (productsMap[el._id] = el));
 
   let details = show ? (
     <>
@@ -45,7 +40,9 @@ const Order = ({ order, products, handleCancelOrder }) => {
           {order.items.map((item, idx) => (
             <tr key={idx} className="col-6">
               <td>
-                <Link to={`/products/${item.product}`}>{productsMap[item.product].name}</Link>
+                <Link to={`/products/${item.product}`}>
+                  {productsMap[item.product].name}
+                </Link>
               </td>
               <td>{item.price}</td>
               <td>{item.quantity}</td>

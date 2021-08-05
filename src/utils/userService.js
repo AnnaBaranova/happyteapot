@@ -15,12 +15,10 @@ function signup(user) {
     })
     .then(({ token }) => {
       tokenService.setToken(token);
-      console.log(token);
     });
 }
 
 function getUser() {
-  console.log("user");
   return tokenService.getUserFromToken();
 }
 
@@ -42,7 +40,6 @@ function login(creds) {
 }
 
 function addToCart(userId, productId, quantity) {
-  console.log(userId, productId);
   const options = {
     method: "POST",
     headers: {
@@ -89,12 +86,8 @@ function cleanCart(userId) {
       Authorization: "Bearer " + tokenService.getToken(),
     },
   };
-  return fetch(BASE_URL + userId + "/cart", options).then((res) =>
-    res.json()
-  );
+  return fetch(BASE_URL + userId + "/cart", options).then((res) => res.json());
 }
-
-
 
 export default {
   signup,
@@ -104,5 +97,5 @@ export default {
   addToCart,
   removeFromCart,
   updateCart,
-  cleanCart
+  cleanCart,
 };

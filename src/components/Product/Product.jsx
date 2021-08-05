@@ -3,10 +3,9 @@ import { Link } from "react-router-dom";
 import Rating from "../Rating/Rating";
 import "./Product.css";
 
-
 const Product = ({ product }) => {
   const [show, setShow] = useState(false);
-  const shortDescription = (""+product.description).slice(0, 50)
+  const shortDescription = ("" + product.description).slice(0, 90);
 
   return (
     <div key={product._id} className="card mb-3 card-size">
@@ -24,18 +23,14 @@ const Product = ({ product }) => {
               >
                 Show less
               </button>
-              <div>
-              {product.description}
-              </div>
+              <div>{product.description}</div>
             </>
           ) : (
             <>
               <button className="btn btn-default" onClick={() => setShow(true)}>
                 Show more
               </button>
-              <div>
-                {shortDescription}
-              </div>
+              <div>{shortDescription}</div>
             </>
           )}
         </li>
