@@ -149,6 +149,7 @@ class App extends Component {
                   handleUpdateProducts={this.getProducts}
                   history={history}
                   match={match}
+                  products={products}
                 />
               )}
             />

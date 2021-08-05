@@ -19,6 +19,7 @@ if (process.env.NODE_ENV === "production") {
 // Put API routes here, before the "catch all" route
 app.use("/api/users", require("./routes/api/users"));
 app.use("/api/products", require("./routes/api/products"));
+app.use("/api/products/", require("./routes/api/reviews"));
 app.use("/api/users/", require("./routes/api/orders"));
 app.use(require("./config/auth"));
 

@@ -51,10 +51,25 @@ function deleteOne(id) {
   return fetch(BASE_URL + id, options).then((res) => res.json());
 }
 
+function addReview(review, productId) {
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+      Authorization: "Bearer " + tokenService.getToken(),
+    },
+    body: JSON.stringify(review),
+  };
+  return fetch(BASE_URL + productId + "/reviews", options).then((res) => res.json());
+}
+
+
+
 export default {
   index,
   getOne,
   create,
   update,
   delete: deleteOne,
+  addReview
 };

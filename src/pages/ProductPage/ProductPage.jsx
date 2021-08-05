@@ -4,21 +4,44 @@ import { Link } from "react-router-dom";
 import productService from "../../utils/productService";
 import Rating from "../../components/Rating/Rating";
 import userService from "../../utils/userService";
+import ReviewForm from "../../components/ReviewForm/ReviewForm";
 
 class ProductPage extends Component {
   constructor(props) {
     super(props);
+    const product = this.props.products.find(
+      (el) => el._id == this.props.match.params.id
+    );
     this.state = {
-      product: {},
+      product: product,
       item: 1,
     };
   }
 
   async componentDidMount() {
-    const product = await productService.getOne(this.props.match.params.id);
+    // const product = await productService.getOne(this.props.match.params.id);
+    const product = this.props.products.find(
+      (el) => el._id == this.props.match.params.id
+    );
     this.setState({ product });
-    console.log(product);
+    console.log("componentDidMount", product);
   }
+
+  async componentDidUpdate(prevProps, prevState) {
+    const product = this.props.products.find(
+      (el) => el._id == this.props.match.params.id
+    );
+    if (prevState.product.reviews.length !== product.reviews.length) {
+      this.setState({ product });
+      console.log("componentDidUpdate", product);
+    }
+  }
+
+  // componentDidUpdate(prevProps, prevState){
+  //   if(prevState.products !== this.state.products && this.state.products.length){
+  //     debugger;
+
+  //   }
 
   IncrementItem = () => {
     const item = this.state.item + 1;
@@ -40,15 +63,15 @@ class ProductPage extends Component {
 
   handleAddToCart = async (e) => {
     e.preventDefault();
-    if(this.props.user) {
-    const newCart = await userService.addToCart(
-      this.props.user._id,
-      this.state.product._id,
-      this.state.item
-    );
-    this.props.setCart(newCart)
+    if (this.props.user) {
+      const newCart = await userService.addToCart(
+        this.props.user._id,
+        this.state.product._id,
+        this.state.item
+      );
+      this.props.setCart(newCart);
     } else {
-      this.props.history.push('/login')
+      this.props.history.push("/login");
     }
   };
 
@@ -67,7 +90,11 @@ class ProductPage extends Component {
               <li class="list-group-item d-flex justify-content-between align-items-center">
                 <Rating
                   value={product.avRating}
-                  text={`${product.numReviews > 0 ? product.numReviews : 0} reviews`}
+                  text={`${
+                    product.reviews && product.reviews.length > 0
+                      ? product.reviews.length
+                      : 0
+                  } reviews`}
                   color="#f8e825"
                 />
               </li>
@@ -106,30 +133,53 @@ class ProductPage extends Component {
                 Add to <i className="fas fa-shopping-cart"></i>
               </button>
             </div>
+            <hr />
+            <h3>Reviews</h3>
+            <div>
+              {product.reviews && product.reviews.length > 0 ? (
+                product.reviews.map((review, idx) => (
+                  <div key={idx} className="col-12">
+                    <Rating
+                      value={review.rating}
+                      text={review.rating}
+                      color="#f8e825"
+                    />
+                    <p>{review.text}</p>
+                  </div>
+                ))
+              ) : (
+                <p>No reviews yet</p>
+              )}
+            </div>
+            <ReviewForm
+              product={product}
+              user={this.props.user}
+              getProducts={this.props.handleUpdateProducts}
+            />
           </div>
           <div className="row md-6">
             <p>Description: {product.name}</p>
           </div>
-          {this.props.user && this.props.user.isAdmin &&
-          <div className="btn-group">
-            <div className="btn-toolbar">
-              <Link to={`/product/${product._id}`}>
-                <button type="button" class="btn btn-secondary">
-                  Update
+          {this.props.user && this.props.user.isAdmin && (
+            <div className="btn-group">
+              <div className="btn-toolbar">
+                <Link to={`/product/${product._id}`}>
+                  <button type="button" class="btn btn-secondary">
+                    Update
+                  </button>
+                </Link>
+              </div>
+              <div className="btn-toolbar">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  onClick={this.handleDelete}
+                >
+                  Delete
                 </button>
-              </Link>
+              </div>
             </div>
-            <div className="btn-toolbar">
-              <button
-                type="button"
-                class="btn btn-secondary"
-                onClick={this.handleDelete}
-              >
-                Delete
-              </button>
-            </div>
-          </div>
-  }
+          )}
         </div>
       </div>
     );

@@ -5,7 +5,7 @@ import "./Product.css";
 
 const Product = ({ product }) => {
 
-  
+
   return (
     <div key={product._id} className="card mb-3 card-size">
       <Link to={`/products/${product._id}`} className="card-header">
@@ -36,7 +36,7 @@ const Product = ({ product }) => {
       </ul>
       <Rating
         value={product.avRating}
-        text={`${product.numReviews > 0 ? product.numReviews : 0} reviews`}
+        text={`${product.reviews.length > 0 ? product.reviews.length : 0} reviews`}
         color="#f8e825"
       />
       {/* <div className="card-body">
