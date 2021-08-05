@@ -1,70 +1,23 @@
-# Getting Started with Create React App
+![Homepage]()
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project 4 <br> Full-stack MERN Application
 
-## Available Scripts
+# **HAPPY TEAPOT**
 
-In the project directory, you can run:
+1. **About**: HAPPY TEAPOT is an e-commerce app, where a customer can buy different type of organic tea. 
+2. **Technologies used**: MongoDB/Mongoose, Node.js, Express.js, React, Bootstrap, token-based authentication.
 
-### `npm start`
+3. **Getting started**: [HappyTeapot](https://happy-teapot.herokuapp.com/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+4. **Trello**: [Trello board](https://trello.com/b/aXEZ0ZIz/happy-teapot) inclides user stoires, [wireframes](https://docs.google.com/presentation/d/1qz03QqBhAfg8CfnkqC6OuLH0NkzfnlVKAoDx32DXOXk/edit#slide=id.ge68ab1ac12_0_54) and [ERD](https://lucid.app/lucidchart/a248f241-2fe0-4891-a43f-84404fa6306c/edit?page=0_0&invitationId=inv_ada6d4e2-050c-4c92-8670-4f1e29b869bd#).
 
-### `npm test`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+5. **Screenshots**:
+![Product Page]()
+![Shopping Cart](public/images/Show_page.png)
 
-### `npm run build`
+6. **Next steps**:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* Add payment functionality
+* Improve style
