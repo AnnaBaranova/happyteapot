@@ -75,6 +75,7 @@ class ProductPage extends Component {
         <div className="row md-6">
           <div className="col md-3">
             <img src={product.img} alt={product.name} fluid />
+            <p>Description: {product.name}</p>
           </div>
           <div className="col md-3">
             <ul class="list-group">
@@ -146,9 +147,6 @@ class ProductPage extends Component {
               user={this.props.user}
               getProducts={this.props.handleUpdateProducts}
             />
-          </div>
-          <div className="row md-6">
-            <p>Description: {product.name}</p>
           </div>
           {this.props.user && this.props.user.isAdmin && (
             <div className="btn-group">
