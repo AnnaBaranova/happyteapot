@@ -13,6 +13,7 @@ class OrderPage extends React.Component {
   }
 
   handleCancelOrder = async (id) => {
+    alert('You canceled the order')
     const newOrders = await orderService.cancelOrder(this.props.user._id, id);
     const orders = await this.props.getOrders();
   };

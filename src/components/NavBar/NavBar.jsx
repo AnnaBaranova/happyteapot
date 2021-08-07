@@ -48,12 +48,15 @@ const NavBar = ({ cart, user, handleLogout }) => {
                 <Link to="/" class="nav-link active">
                   H A P P Y T E A P O T
                 </Link>
+                </li>
+                <li class="nav-item">
+                <img src="https://media.giphy.com/media/JPxWi0t2uwtZR5KaBB/giphy.gif" alt="gif" width="40px"/>
               </li>
               &nbsp;&nbsp;&nbsp;
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                {/* <a class="nav-link" href="#">
                   About
-                </a>
+                </a> */}
               </li>
             </ul>
             <ul class="navbar-nav ms-md-auto">

@@ -5,7 +5,7 @@ import "./Product.css";
 
 const Product = ({ product }) => {
   const [show, setShow] = useState(false);
-  const shortDescription = ("" + product.description).slice(0, 90);
+  const shortDescription = ("" + product.description).slice(0, 50);
 
   return (
     <div key={product._id} className="card mb-3 card-size">
@@ -27,10 +27,10 @@ const Product = ({ product }) => {
             </>
           ) : (
             <>
+              <div>{shortDescription}</div>
               <button className="btn btn-default" onClick={() => setShow(true)}>
                 Show more
               </button>
-              <div>{shortDescription}</div>
             </>
           )}
         </li>

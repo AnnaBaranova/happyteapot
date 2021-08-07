@@ -72,7 +72,7 @@ class ProductPage extends Component {
       <div>
         <Link to="/">Go Back </Link>
         <h1> {product.name}</h1>
-        <div className="row md-6">
+        <div className="row container md-6">
           <div className="col md-3">
             <img src={product.img} alt={product.name} fluid />
             <p>Description: {product.description}</p>
