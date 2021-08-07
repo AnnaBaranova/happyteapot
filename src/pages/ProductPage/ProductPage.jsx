@@ -75,7 +75,7 @@ class ProductPage extends Component {
         <div className="row md-6">
           <div className="col md-3">
             <img src={product.img} alt={product.name} fluid />
-            <p>Description: {product.name}</p>
+            <p>Description: {product.description}</p>
           </div>
           <div className="col md-3">
             <ul class="list-group">

@@ -1,4 +1,4 @@
-![Homepage]()
+![Homepage](docs/HomePage.png)
 
 ## Project 4 <br> Full-stack MERN Application
 
@@ -14,8 +14,8 @@
 
 
 5. **Screenshots**:
-![Product Page]()
-![Shopping Cart](public/images/Show_page.png)
+![Product Page](docs/ProductPage.png)
+![Shopping Cart](docs/ShoppingCard.png)
 
 6. **Next steps**:
 

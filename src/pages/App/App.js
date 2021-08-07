@@ -38,7 +38,7 @@ class App extends Component {
 
   async componentDidMount() {
     await this.getProducts();
-    if (this.state.user) {
+    if (this.state.user && this.state.user.shoppingCart) {
       this.setState({ cart: this.state.user.shoppingCart });
     }
   }
@@ -67,7 +67,6 @@ class App extends Component {
   setOrders = (orders) => {
     this.setState({ orders });
   };
-
 
   render() {
     const { user, products, cart, orders } = this.state;
