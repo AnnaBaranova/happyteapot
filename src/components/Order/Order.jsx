@@ -78,11 +78,12 @@ const Order = ({ order, products, handleCancelOrder }) => {
                 <td>{order.createdAt.toString().slice(0, 10)}</td>
                 <td>{order.items.length}</td>
                 <td>{order.total} CAD</td>
-                <td>Status</td>
+                <td>{checkStatus()}</td>
                 <td>
                   <button
                     className="btn btn-danger mb-3"
                     onClick={() => handleCancelOrder(order._id)}
+                    disabled={checkStatus() !== 'received'}
                   >
                     {" "}
                     Cancel
