@@ -10,7 +10,7 @@ const HomePage = ({ user, products }) => {
   return (
     <div className="container-fluid">
       <h1> Our products</h1>
-      <div className="row">
+      <div className="row product-list">
         {products.map((product, idx) => (
           <div key={idx} className="col-md-3 col-sm-2">
             <Product product={product} />
